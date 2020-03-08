@@ -1,0 +1,95 @@
+<div class="col-md-6 user-container">
+    <h2 style="margin-top: 20px; letter-spacing: 9px; font-family:Arial, Helvetica, sans-serif">
+        To-do list</h2>
+
+    <!--botão de adicionar atividade-->
+    <button class="btn btn-warning fa fa-coffee" (click)="openModal(template)"
+        style="width:210px; margin-bottom:10px; margin-top:13px">
+        <p style="font-family:arial; margin-bottom:10px; margin-top: 5px"> Adicionar atividade </p>
+    </button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="hidden" style="margin-left:100px"> - </th>
+                <th> Ícone </th>
+                <th> Atividade </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let atividade of Atividades; let i= index" class="alert alert-info" style="width: 50%;">
+
+                <td class="hidden"></td>
+                <td><span [class]="atividade.icon"></span></td>
+                <td>{{atividade.Value}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button class="btn btn-danger" (click)="deletarAtividade(atividade)"> Remover </button>
+                    <button class="btn btn-warning ml-2" (click)="editarAtividade(atividade)">Editar</button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Adicionar atividade </h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body ml-5">
+
+            <form name="itemForm">
+                <label>Atividade:</label>
+                <input id="Value" name="Value" required [(ngModel)]="novaAtividade.Value" minlength="3" maxlength="65"
+                    style="width: 50%;" placeholder="Escreva uma atividade!" class="form-control">
+            </form>
+
+            <form name="itemForm">
+                <label class="mt-1">Icon: </label>
+                <div class="row mr-5">
+
+                    <input id="Value" name="Value" required [(ngModel)]="novaAtividade.icon" minlength="3"
+                        maxlength="60" style="width: 50%;" placeholder="Insira o ícone" class="form-control ml-3">
+                    <div class="ml-4 mt-1"><span [class]=novaAtividade.icon></span></div>
+                </div>
+
+            </form>
+            <button type="button" class="btn btn-warning mt-3" (click)=adicionarAtividade()>Adicionar
+                atividade</button>
+        </div>
+    </ng-template>
+
+    <ng-template #editar>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Editar atividade </h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <form name="itemForm">
+                    <div class="row">
+                        <div class="col-12 ">
+                            <label>Atividade:</label>
+                            <input id="Value1" name="Value1" required [(ngModel)]="novaAtividade.Value" maxlength="100"
+                                placeholder="Insira a atividade" class="form-control w-50"></div>
+                        <div class="col-12 mt-2">
+                            <label for="Icon">Ícone:</label>
+                            <input id="Icon" name="Icon" required [(ngModel)]="novaAtividade.icon"
+                                placeholder="Insira o ícone" class="form-control w-50">
+                            <div class=""><span [class]="novaAtividade.icon"></span></div>
+                        </div>
+                    </div>
+                </form>
+                <br>
+
+                <button type="submit" (click)="atualizarAtividade()" class="btn btn-warning">Atualizar</button>
+            </div>
+        </div>
+    </ng-template>
+
+</div>
